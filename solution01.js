@@ -1,10 +1,12 @@
 const processStatistics = async (start, end) => {
   try {
-    // Fetch
+    // Fetch Json File
     const response = await fetch(
       "https://bitbucket.org/!api/2.0/snippets/tawkto/aA8zqE/4f62624a75da6d1b8dd7f70e53af8d36a1603910/files/webstats.json"
     );
+    // Convert into json
     const apiResponse = await response.json();
+    // Checking for start end parameters
     if (start && end) {
       let result = [];
       let websiteId = [];
@@ -35,6 +37,7 @@ const processStatistics = async (start, end) => {
       }
       console.log(result);
     } else {
+      // full json file data calculation
       let result = [];
       let websiteId = [];
       for (let i = 0; i < apiResponse.length; i++) {
@@ -61,6 +64,8 @@ const processStatistics = async (start, end) => {
     console.log(error.message);
   }
 };
+// For get the data in range of some dates pass arguments start and end times
+// for all json calculation don't pass arguments
 processStatistics(
   new Date(2019, 3, 1, 05, 30, 00),
   new Date(2019, 3, 2, 05, 30, 00)
